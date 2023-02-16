@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
         color: "#f2f2f2",
         alignSelf: "center",
-        marginTop: 180,
+        marginTop: 190,
     },
 
     inputStyle: {
