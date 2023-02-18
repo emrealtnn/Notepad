@@ -2,7 +2,7 @@ import * as React from "react";
 import {Button, Text, View} from "react-native";
 import {AuthContext} from "../utils";
 
-export function HomeScreen() {
+export function ProfileScreen() {
     const { signOut } = React.useContext(AuthContext);
 
     return (

@@ -4,6 +4,7 @@ import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { initializeApp } from "firebase/app";
 import { firebaseConfig } from "../../firebase-config";
 import { useNavigation } from "@react-navigation/native";
+import {AuthContext} from "../utils";
 
 
 export default function LoginScreen() {
@@ -14,13 +15,17 @@ export default function LoginScreen() {
 
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
+    const { signIn } = React.useContext(AuthContext);
+
 
     const handleLogin = () => {
         signInWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
+
                 const user = userCredential.user;
                 navigation.navigate("Home");
-                console.log("Login successful");
+                signIn({ email, password })
+
             })
             .catch((error) => {
                 Alert.alert("Lütfen bilgilerinizi kontrol ediniz");
@@ -47,7 +52,7 @@ export default function LoginScreen() {
                     secureTextEntry={true}
                 ></TextInput>
                 <TouchableOpacity
-                    onPress={handleLogin}
+                    onPress={() => handleLogin()}
                     style={styles.buttonitem}
                 >
                     <Text style={[styles.buttonText, {marginStart: 0}]}>Giriş Yap</Text>
