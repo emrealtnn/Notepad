@@ -1,13 +1,14 @@
 import * as React from "react";
-import {Image, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View} from "react-native";
+import {ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View} from "react-native";
 import {getAuth, createUserWithEmailAndPassword} from "firebase/auth";
 import {initializeApp} from "firebase/app";
 import {firebaseConfig} from "../../firebase-config";
 import {useNavigation} from "@react-navigation/native";
 import {getFirestore, doc, setDoc} from "firebase/firestore";
 import "firebase/firestore";
+import {AuthContext} from "../utils";
 
-export default function SigninScreen() {
+export default function RegisterScreen() {
     const [name, setName] = React.useState("");
     const [surname, setSurname] = React.useState("");
     const [email, setEmail] = React.useState("");
@@ -35,6 +36,9 @@ export default function SigninScreen() {
             .catch((error) => {
                 alert(error);
             });
+    };
+    register=( email, password) => {
+        console.log("registering user");
     };
 
     return (
@@ -76,7 +80,7 @@ export default function SigninScreen() {
             <View style={{alignSelf: "center"}}>
                 <TouchableOpacity
                     style={styles.buttonStyle}
-                    onPress={() => handleCreateAccount()}
+                    onPress={() => {handleCreateAccount(); register({ email, password })  }}
                 >
                     <Text style={styles.buttonText}>Kayıt Ol</Text>
                 </TouchableOpacity>
